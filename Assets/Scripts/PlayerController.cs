@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -64,6 +65,14 @@ public class PlayerController : MonoBehaviour
 
         if (hitCollider == null) return false;
         else return true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("NextStageTrigger"))
+        {
+            GameManager.Instance.LoadNextStage();
+        }
     }
 
     private void OnDrawGizmos()

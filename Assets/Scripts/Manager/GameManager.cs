@@ -10,8 +10,10 @@ public class GameManager : MonoBehaviour
 
     private PlayerController _player;
     private GameObject _lastCheckPoint;
+    private Vector3 stagePos;
 
     public static GameManager Instance { get; private set; }
+    public GameObject[] stageParts;
 
     private void Awake()
     {
@@ -32,7 +34,7 @@ public class GameManager : MonoBehaviour
     }
     //TODO::loadLevel
     //TODO:: void TriggerObs(int 0) if Aktuelller spielr = client
-    //lsite mit objekten von Aktuellen Spieler ín der Scene
+    //lsite mit objekten von Aktuellen Spieler ï¿½n der Scene
     public void PlayerDeath()
     {
         _player.gameObject.SetActive(false);
@@ -50,5 +52,12 @@ public class GameManager : MonoBehaviour
     {
         _lastCheckPoint = pCheckPoint;
         //TODO::Sound
+    }
+
+    public void LoadNextStage()
+    {
+        stagePos = transform.position;
+        stagePos.x += 10;
+        Instantiate(stageParts[0], stagePos, Quaternion.identity);
     }
 }
