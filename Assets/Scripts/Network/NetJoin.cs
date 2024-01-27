@@ -32,13 +32,12 @@ public class NetJoin : MonoBehaviour
         int port = trans.port;
         string name = "Test";
 
-        Dictionary<string, string> data = new Dictionary<string, string>();
-        data["name"] = name;
-        data["ip"] = ip;
-        data["port"] = port.ToString();
+        WWWForm form = new WWWForm();
+        form.AddField("name", name);
+        form.AddField("ip", ip);
+        form.AddField("port", port.ToString());
 
-        using UnityWebRequest request = UnityWebRequest.Post("https://rhyth.de/match", data);
-        request.SetRequestHeader("Access-Control-Allow-Origin", "*");
+        using UnityWebRequest request = UnityWebRequest.Post("https://rhyth.de/match", form);
         yield return request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
@@ -61,7 +60,6 @@ public class NetJoin : MonoBehaviour
     public IEnumerator GetAllMatches(UnityAction<List<Match>> onGottenMatches)
     {
         using UnityWebRequest request = UnityWebRequest.Get("https://rhyth.de/match");
-        request.SetRequestHeader("Access-Control-Allow-Origin", "*");
         yield return request.SendWebRequest();
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {

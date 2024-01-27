@@ -38,9 +38,9 @@ public class MatchList : MonoBehaviour
 
     public void Refresh()
     {
-        while (matchListContent.childCount > 0)
+        foreach (Transform child in matchListContent)
         {
-            Destroy(matchListContent.GetChild(0).gameObject);
+            Destroy(child.gameObject);
         }
 
         StartCoroutine(netJoin.GetAllMatches(OnGottenMatches));
