@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     private PlayerController _player;
     private GameObject _lastCheckPoint;
     private Vector3 stagePos;
-    private bool triggerOnce;
 
     public static GameManager Instance { get; private set; }
     public GameObject[] stageParts;
