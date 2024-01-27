@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("NextStageTrigger"))
         {
+            
             GameManager.Instance.LoadNextStage();
         }
     }
