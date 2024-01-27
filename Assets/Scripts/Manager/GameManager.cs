@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     {
         _player.gameObject.SetActive(false);
         UIManager.Instance.ShowGameOverScreen(PlayerReset);
-        //TODO::Sound
+        SoundManager.Instance.PlayDeathSound();
     }
     public void PlayerReset()
     {

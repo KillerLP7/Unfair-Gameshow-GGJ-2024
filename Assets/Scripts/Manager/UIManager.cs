@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private float _ScreenTime;
     [SerializeField] private List<RectTransform> _gameOverScreens;
+    private Rigidbody2D _rb;
 
     public static UIManager Instance { get; private set; }
 
