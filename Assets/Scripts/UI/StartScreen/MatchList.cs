@@ -1,57 +1,64 @@
+using Mirror;
 using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using static NetJoin;
+using UnityEngine.UI;
 
 public class MatchList : MonoBehaviour
 {
-    [SerializeField] private MatchDisplay matchPrefab;
-    [SerializeField] private Transform matchListContent;
+    [SerializeField] private TMP_InputField ownName;
+    [SerializeField] private TMP_InputField ip;
+    [SerializeField] private TMP_InputField port;
 
-    private NetJoin netJoin;
+    [SerializeField] private Button cancelButton;
 
-    private void Awake()
-    {
-        netJoin = GetComponent<NetJoin>();
-    }
+    private ExtendedCoroutine connectedRoutine;
 
     private void Start()
     {
-
 #if UNITY_WEBGL
-        // dont host in webgl build
+        NetworkClient.OnConnectedEvent += OnConnected;
 #else
         HostMatch();
 #endif
     }
 
+    public void OnTryToConnect()
+    {
+        if (connectedRoutine != null)
+            return;
+
+        cancelButton.interactable = false;
+        connectedRoutine = new ExtendedCoroutine(this, Connecting(), startNow: true);
+    }
+
+    public void StopTryingToConnect()
+    {
+        StopCoroutine(connectedRoutine.Coroutine);
+        connectedRoutine = null;
+        cancelButton.interactable = true;
+
+        NetManager.singleton.StopClient();
+    }
+
+    private void OnConnected()
+    {
+        StopTryingToConnect();
+        Destroy(gameObject);
+    }
+
+    private IEnumerator Connecting()
+    {
+        yield return new WaitForSeconds(7.0f);
+
+        if (!NetworkClient.isConnected)
+            StopTryingToConnect();
+    }
+
     public void HostMatch()
     {
         NetManager.singleton.StartHost();
-        StartCoroutine(netJoin.HostMatch(OnMatchHosted));
+        Destroy(gameObject);
     }
 
-    private void OnMatchHosted(bool success)
-    {
-
-    }
-
-    public void Refresh()
-    {
-        foreach (Transform child in matchListContent)
-        {
-            Destroy(child.gameObject);
-        }
-
-        StartCoroutine(netJoin.GetAllMatches(OnGottenMatches));
-    }
-
-    private void OnGottenMatches(List<Match> matches)
-    {
-        foreach (Match match in matches)
-        {
-            MatchDisplay matchDisplay = Instantiate(matchPrefab, matchListContent);
-            matchDisplay.SetMatch(match);
-        }
-    }
 }
