@@ -26,18 +26,16 @@ public class NetJoin : MonoBehaviour
     public IEnumerator HostMatch(UnityAction<bool> onFinished)
     {       
         print(NetManager.singleton.networkAddress);
-        SimpleWebTransport trans = NetManager.singleton.transport as SimpleWebTransport; ;
+        SimpleWebTransport trans = NetManager.singleton.transport as SimpleWebTransport;
 
-        string ip = GetLocalIPAddress();
-        int port = trans.port;
-        string name = "Test";
+        string jsonData = JsonUtility.ToJson(new { name = "Test", ip = GetLocalIPAddress(), port = trans.port.ToString() });
+        byte[] postData = System.Text.Encoding.UTF8.GetBytes(jsonData);
 
-        WWWForm form = new WWWForm();
-        form.AddField("name", name);
-        form.AddField("ip", ip);
-        form.AddField("port", port.ToString());
+        using UnityWebRequest request = new UnityWebRequest("https://rhyth.de/match", "POST");
+        request.uploadHandler = (UploadHandler)new UploadHandlerRaw(postData);
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
 
-        using UnityWebRequest request = UnityWebRequest.Post("https://rhyth.de/match", form);
         yield return request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
