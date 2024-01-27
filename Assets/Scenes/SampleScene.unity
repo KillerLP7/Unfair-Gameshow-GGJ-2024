@@ -440,6 +440,8 @@ MonoBehaviour:
   _spawnPoint: {fileID: 2092368707}
   _playerPrefab: {fileID: 5381703138919200112, guid: 3f2df9d53d9969741965534e88090783, type: 3}
   _cameraFollow: {fileID: 1690300445}
+  x: 10
+  y: 0
   stageParts:
   - {fileID: 3151065576059647487, guid: 7c1c4e28fc9e3c04684ffb4dd2d0d58c, type: 3}
 --- !u!4 &787696993
