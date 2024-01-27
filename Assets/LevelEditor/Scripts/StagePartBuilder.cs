@@ -4,15 +4,6 @@ using UnityEngine;
 
 public class StagePartBuilder : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public List<StagePartHazard> AllStageHazards = new List<StagePartHazard>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

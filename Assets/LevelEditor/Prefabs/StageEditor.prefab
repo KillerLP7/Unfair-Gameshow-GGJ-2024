@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7456163010657207360
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1699228403938566923}
+  - component: {fileID: 3041935770216297013}
+  m_Layer: 0
+  m_Name: StageEditor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1699228403938566923
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7456163010657207360}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1580.7462, y: 575.08716, z: -5.401313}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 111903272774264995}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3041935770216297013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7456163010657207360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57f9043a493582845b179185fb7af4e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageBuilder: {fileID: 772766714167763754}
+--- !u!1001 &7212394546231311954
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1699228403938566923}
+    m_Modifications:
+    - target: {fileID: 5214360002662498368, guid: a50ef70b97424314c8c952ee4e0c5335, type: 3}
+      propertyPath: m_Name
+      value: StageBuilder
+      objectReference: {fileID: 0}
+    - target: {fileID: 7321196921203005169, guid: a50ef70b97424314c8c952ee4e0c5335, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -365.0918
+      objectReference: {fileID: 0}
+    - target: {fileID: 7321196921203005169, guid: a50ef70b97424314c8c952ee4e0c5335, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -43.39148
+      objectReference: {fileID: 0}
+    - target: {fileID: 7321196921203005169, guid: a50ef70b97424314c8c952ee4e0c5335, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.2256107
+      objectReference: {fileID: 0}
+    - target: {fileID: 7321196921203005169, guid: a50ef70b97424314c8c952ee4e0c5335, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7321196921203005169, guid: a50ef70b97424314c8c952ee4e0c5335, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7321196921203005169, guid: a50ef70b97424314c8c952ee4e0c5335, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7321196921203005169, guid: a50ef70b97424314c8c952ee4e0c5335, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7321196921203005169, guid: a50ef70b97424314c8c952ee4e0c5335, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7321196921203005169, guid: a50ef70b97424314c8c952ee4e0c5335, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7321196921203005169, guid: a50ef70b97424314c8c952ee4e0c5335, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7975586434371542392, guid: a50ef70b97424314c8c952ee4e0c5335, type: 3}
+      propertyPath: AllStageHazards.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7975586434371542392, guid: a50ef70b97424314c8c952ee4e0c5335, type: 3}
+      propertyPath: AllStageHazards.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2ef2d7641ddddac499ae83f696cb3755, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a50ef70b97424314c8c952ee4e0c5335, type: 3}
+--- !u!4 &111903272774264995 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7321196921203005169, guid: a50ef70b97424314c8c952ee4e0c5335, type: 3}
+  m_PrefabInstance: {fileID: 7212394546231311954}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &772766714167763754 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7975586434371542392, guid: a50ef70b97424314c8c952ee4e0c5335, type: 3}
+  m_PrefabInstance: {fileID: 7212394546231311954}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 324101e0e21b56643a5611343269ccf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
