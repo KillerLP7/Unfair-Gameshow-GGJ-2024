@@ -5,6 +5,7 @@ using UnityEngine;
 public class BaseObs : MonoBehaviour
 {
     private Collider _collider;
+    
     // Start is called before the first frame update
     void Start()
     {

@@ -6,8 +6,10 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] List<EventReference> eventRefStrings;
-    EventInstance eventInstance;
+    [SerializeField] EventReference deathRefStrings;
+    EventInstance deathInstance;
+    [SerializeField] EventReference duckRefStrings;
+    EventInstance duckInstance;
     public static SoundManager Instance { get; private set; }
 
     private void Awake()
@@ -27,8 +29,15 @@ public class SoundManager : MonoBehaviour
     public void PlayDeathSound()
     {
         print("DeathSound");
-        eventInstance = FMODUnity.RuntimeManager.CreateInstance(eventRefStrings[0]);
-        eventInstance.start();
-        eventInstance.release();
+        deathInstance = FMODUnity.RuntimeManager.CreateInstance(deathRefStrings);
+        deathInstance.start();
+        deathInstance.release();
+    }
+    public void PlayDuckSound()
+    {
+        print("DuckSound");
+        duckInstance = FMODUnity.RuntimeManager.CreateInstance(duckRefStrings);
+        duckInstance.start();
+        duckInstance.release();
     }
 }

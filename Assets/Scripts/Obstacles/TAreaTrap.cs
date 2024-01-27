@@ -6,6 +6,7 @@ public class TAreaTrap : BaseObs, ITriggerdObstacle
 {
     [SerializeField] private GameObject _areaObj;
     [SerializeField] private float _liveTime;
+    [SerializeField] private ParticleSystem _particleSystem;
 
     private bool _triggerd = false; // lul
     
