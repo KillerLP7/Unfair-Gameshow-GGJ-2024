@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8745a2d66980bbb4d9a72d8133842e1d, type: 3}
-  m_Name: TestHazard
+  m_Name: DeleteHazard
   m_EditorClassIdentifier: 
-  Name: BadSpikes
-  hazardPrefab: {fileID: 8965055471489015123, guid: 390dd6c6f37809646a5cbbbc852255f1, type: 3}
-  hazardSprite: {fileID: 21300000, guid: d0fbe4776319ffd49acab95b99cf21e5, type: 3}
-  size: 1
+  Name: DeleteHazard
+  hazardPrefab: {fileID: 0}
+  hazardSprite: {fileID: 21300000, guid: b41a4336ad1514444973529a011a43d1, type: 3}
+  size: 0
