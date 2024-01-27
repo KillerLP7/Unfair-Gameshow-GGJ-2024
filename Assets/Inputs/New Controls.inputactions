@@ -6,9 +6,18 @@
             "id": "bc3a2365-056a-4230-818a-4a5d7dc3fa9d",
             "actions": [
                 {
-                    "name": "Attack",
+                    "name": "move",
+                    "type": "Value",
+                    "id": "50a3e452-55cd-4e7f-91d1-6416cc93176e",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Jump",
                     "type": "Button",
-                    "id": "774ede31-e8ac-41fd-85e4-ea17c376c747",
+                    "id": "0b074898-7914-4930-bc6d-ba935ad24d46",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -17,24 +26,68 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "c337b647-3da7-4351-b28f-d557a5a27623",
-                    "path": "<Keyboard>/e",
+                    "name": "2D Vector",
+                    "id": "6886d4dd-91bc-4188-999b-7d6d51d8305a",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack",
-                    "isComposite": false,
+                    "action": "move",
+                    "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "3c61269a-1a1f-43c8-b13e-86c410daf164",
-                    "path": "<Gamepad>/buttonWest",
+                    "name": "up",
+                    "id": "e007865b-a6bc-4b72-948e-9e3e812ce734",
+                    "path": "<Keyboard>/#(#)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack",
+                    "action": "move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "fe76be4d-c317-44db-a016-59f125e49bc2",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "a1d79abe-0831-41ce-9ca4-01465a197f66",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "5bf679ef-b670-41f7-8e12-2601f79de40e",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "54e11e4c-1246-4839-90c8-d17eef55cc4d",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
