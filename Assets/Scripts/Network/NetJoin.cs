@@ -37,8 +37,8 @@ public class NetJoin : MonoBehaviour
         data["ip"] = ip;
         data["port"] = port.ToString();
 
-        using UnityWebRequest request = UnityWebRequest.Post("http://rhyth.de:9025/match", data);
-
+        using UnityWebRequest request = UnityWebRequest.Post("https://rhyth.de/match", data);
+        request.SetRequestHeader("Access-Control-Allow-Origin", "*");
         yield return request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
@@ -60,7 +60,8 @@ public class NetJoin : MonoBehaviour
 
     public IEnumerator GetAllMatches(UnityAction<List<Match>> onGottenMatches)
     {
-        using UnityWebRequest request = UnityWebRequest.Get("http://rhyth.de:9025/match");
+        using UnityWebRequest request = UnityWebRequest.Get("https://rhyth.de/match");
+        request.SetRequestHeader("Access-Control-Allow-Origin", "*");
         yield return request.SendWebRequest();
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
