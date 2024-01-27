@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{a9d3d107-f532-4749-b6e3-b3cee5e4b14a}">
+		<property name="assetPath">
+			<value>Cymatics - Menu FX Organic 1 - A6(Sus2).wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.6342176870748299</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{5d6e305a-d8c9-4dd9-a155-a31f2bfd4d07}</destination>
+		</relationship>
+	</object>
+</objects>

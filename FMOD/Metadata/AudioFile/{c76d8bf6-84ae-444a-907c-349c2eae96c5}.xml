@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{c76d8bf6-84ae-444a-907c-349c2eae96c5}">
+		<property name="assetPath">
+			<value>funny-cartoon-cry-144756.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.5412244897959184</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{5d6e305a-d8c9-4dd9-a155-a31f2bfd4d07}</destination>
+		</relationship>
+	</object>
+</objects>

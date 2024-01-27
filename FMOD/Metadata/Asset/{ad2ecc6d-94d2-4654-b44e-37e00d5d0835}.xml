@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="EncodableAsset" id="{ad2ecc6d-94d2-4654-b44e-37e00d5d0835}">
+		<property name="assetPath">
+			<value>player_block_destroy/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{5d6e305a-d8c9-4dd9-a155-a31f2bfd4d07}</destination>
+		</relationship>
+	</object>
+</objects>

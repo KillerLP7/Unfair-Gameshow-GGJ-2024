@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{49956897-89c5-48cd-998f-068e82cb9a45}">
+		<property name="assetPath">
+			<value>horn-toy-claun-like-sound-1-94986 - Trimmed.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.59374149659863951</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{5d6e305a-d8c9-4dd9-a155-a31f2bfd4d07}</destination>
+		</relationship>
+	</object>
+</objects>
