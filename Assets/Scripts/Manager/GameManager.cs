@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
         //TODO::Sound
     }
 
+    //TODO: add _cameraFollow.SetBounds(_player.transform.position.x, _player.transform.position.y); To limmet the camera movment on the left side
     public void LoadNextStage()
     {
         if (createdStageObjects.Count >= 5)
@@ -75,4 +76,5 @@ public class GameManager : MonoBehaviour
     {
         createdStageObjects.RemoveAt(0);
     }
+    public PlayerController GetPlayerController() { return _player; }
 }
