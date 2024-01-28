@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TPusher : BaseObs, ITriggerdObstacle
+public class TPusher : BaseTriggerdObj, ITriggerdObstacle
 {
     [SerializeField] private float _strength;
     private Rigidbody2D _rb;
@@ -16,7 +16,7 @@ public class TPusher : BaseObs, ITriggerdObstacle
         _rb.gravityScale = 0.0f;
     }
 
-    public void TriggerEffect()
+    public override void TriggerEffect()
     {
         _rb.gravityScale = _defaultGravity;
         _rb.AddForce((Vector2.up * _strength));

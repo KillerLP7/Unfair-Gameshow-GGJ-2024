@@ -1,8 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
+public class playerCreatedLevel
+{
+    public GameObject level;
+    public int iD;
+    public List<GameObject> triggerObj;
+}
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject _spawnPoint;
@@ -30,6 +37,10 @@ public class GameManager : MonoBehaviour
     private PlayerController _player;
     private GameObject _lastCheckPoint;
     private Vector3 stagePos;
+    private List<Dictionary<int, int>> _playerLevels;
+    private List<playerCreatedLevel> _playerCreatedLevels;
+    private Dictionary<int, int> _playerLevel;
+    private int _lastPlayerID = -1;
 
     public static GameManager Instance { get; private set; }
     public GameObject[] stageParts;
@@ -89,6 +100,7 @@ public class GameManager : MonoBehaviour
     //TODO: add _cameraFollow.SetBounds(_player.transform.position.x, _player.transform.position.y); To limmet the camera movment on the left side
     public void LoadNextStage()
     {
+
         if (createdStageObjects.Count >= 5)
         {
             Destroy(createdStageObjects[0]);
@@ -97,16 +109,80 @@ public class GameManager : MonoBehaviour
         //stagePos = Vector3.zero;
         stagePos.x += x;
         //Random.Range(0, )
-        createdStageObjects.Add(Instantiate(stageParts[0], stagePos, Quaternion.identity));
+        GameObject levelToLoad;
+        List<GameObject> levelObj;
+        if (_playerLevels.Count == 0)
+        {
+            int randomLevelNR = Random.Range(0, stageParts.Length);
+            levelToLoad = Instantiate(stageParts[randomLevelNR], stagePos, Quaternion.identity);
+        }
+        else
+        {
+            playerCreatedLevel tempPlayerLevel = new playerCreatedLevel();
+            tempPlayerLevel.level = StageBuilder.CreateStageByStagePart(_playerLevels[0], out tempPlayerLevel.triggerObj);
+            tempPlayerLevel.iD = _playerLevels.First()[0];
+            _playerCreatedLevels.Add(tempPlayerLevel);
+            levelToLoad = tempPlayerLevel.level;
+        }
+        createdStageObjects.Add(levelToLoad);
     }
 
-    public void SetLevel(Dictionary<int, int> level)
+    public void CheckIsLevelPartByPlayer(GameObject pLevel)
     {
-        foreach (var item in level.Keys)
+        if (!(_lastPlayerID >= 0))
+            LevelFinshedFromOberverX(_lastPlayerID);
+
+        _lastPlayerID = -1;
+        foreach (var item in _playerCreatedLevels)
         {
-            Debug.Log(item + " " + level[item]);
+            if (item.level == pLevel)
+            {
+                LevelLoadedFromOberverX(item.iD, item.triggerObj.Count);
+                _lastPlayerID = item.iD;
+            }
         }
     }
+    // int id = Id of the Observer / levelcreator
+    public void SetLevel(Dictionary<int, int> level, int id)
+    {
+        _playerLevels.Append(level);
+    }
+
+    // Nofify that observers level is ready loaded
+    public void LevelLoadedFromOberverX(int pOberverID, int amountOfStuffToInteractWith)
+    {
+        NetManager.singleton.Player.CmdLevelLoaded(pOberverID, amountOfStuffToInteractWith);
+    }
+
+    // Nofify that observers level is finished (player run throug)
+    public void LevelFinshedFromOberverX(int pOberverID)
+    {
+        NetManager.singleton.Player.CmdLevelFinshed(pOberverID);
+    }
+    // Observer interacts with level
+    public void ObserverInteractWithLevel(int netId, int interactable)
+    {
+        if (!(_lastPlayerID == netId)) return;
+        foreach (var classItem in _playerCreatedLevels)
+        {
+            if (classItem.iD == netId)
+            {
+                for (int i = 0; i < classItem.triggerObj.Count; i++)
+                {
+                    if (i == interactable)
+                    {
+                        if (classItem.triggerObj[i].TryGetComponent(out BaseTriggerdObj baseTriggerd))
+                        {
+                            baseTriggerd.TriggerEffect();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Player died on level with netID // add points server
+
 
     public void DestroyStage()
     {

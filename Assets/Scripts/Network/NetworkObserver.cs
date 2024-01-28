@@ -29,18 +29,28 @@ public class NetworkObserver : NetworkBehaviour
         if (player == null)
             return;
 
-       player.SetLevel(a, b);
+       player.SetLevel(a, b, Conn.connectionId);
     }
 
     [ClientRpc]
-    public void SetSubmittedLevelInteractable(bool interactable)
+    public void SetSubmittedLevelInteractable(int amountOfButtons)
     {
+        // TODO:
+    }
 
+    [ClientRpc]
+    public void SubmittedLevelFinished()
+    {
+        // TODO:
     }
 
     [Command]
     public void CmdInteract(int toInteract)
     {
+        NetworkPlayer player = NetManager.singleton!.Player;
+        if (player == null)
+            return;
 
+        player.Interact(toInteract, Conn.connectionId);
     }
 }

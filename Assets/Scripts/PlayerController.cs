@@ -84,8 +84,10 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("NextStageTrigger"))
         {
+            GameManager.Instance.CheckIsLevelPartByPlayer(collision.transform.parent.gameObject);
             //Limmets the movment of the player to the left
             _leftBound = gameObject.transform.position.x;
+            //TODO:: Level Finsied wit index from all player levels 
             GameManager.Instance.LoadNextStage();
         }
     }
