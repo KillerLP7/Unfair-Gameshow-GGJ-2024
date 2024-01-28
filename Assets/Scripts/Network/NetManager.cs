@@ -24,7 +24,7 @@ public class NetManager : NetworkManager
     public NetworkPlayer Player { get; private set; }
     public List<NetworkObserver> Observers { get; private set; } = new List<NetworkObserver>();
 
-    public NetworkObserver LocalObserver { get;  set; }
+    public NetworkObserver LocalObserver { get; set; }
 
     int counter = 0;
 
@@ -288,6 +288,25 @@ public class NetManager : NetworkManager
     public override void OnStopClient() { }
 
     #endregion
+
+    public struct SetLevelClientMessage : NetworkMessage
+    {
+        public List<int> a;
+        public List<int> b;
+        public int id;
+    }
+
+    public struct InteractClientMessage : NetworkMessage
+    {
+        public int toInteract;
+        public int netID;
+    }
+
+    public struct LevelFinshedMessage : NetworkMessage
+    {
+        public int pObserverID;
+    }
+
 
     #region Messages
     private void OnHelloMessage(NetworkConnectionToClient conn, HelloMessage message)

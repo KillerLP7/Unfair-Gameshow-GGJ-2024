@@ -43,7 +43,7 @@ public class NetworkObserver : NetworkBehaviour
         player.SetLevel(a, b, Conn.connectionId);
     }
 
-    [ClientRpc]
+    [TargetRpc]
     public void SetSubmittedLevelInteractable(int amountOfButtons)
     {
         if (!isLocalPlayer) return;
@@ -53,7 +53,7 @@ public class NetworkObserver : NetworkBehaviour
         }
     }
 
-    [ClientRpc]
+    [TargetRpc]
     public void SubmittedLevelFinished()
     {
         if (!isLocalPlayer) return;
