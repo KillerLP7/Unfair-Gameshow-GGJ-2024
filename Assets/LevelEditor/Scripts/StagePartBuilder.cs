@@ -12,9 +12,9 @@ public class StagePartBuilder : MonoBehaviour
     [SerializeField]  private List<StagePartHazard> allStageHazards = new List<StagePartHazard>();
     public List<StagePartHazard> AllStageHazards { get { return allStageHazards; } }
 
-    public GameObject CreateStageByStagePart(Dictionary<int,int> stagePart)
+    public GameObject CreateStageByStagePart(Dictionary<int,int> stagePart, Vector3 spawnPosition)
     {
-        GameObject stage = Instantiate(BaseStagePrefab);
+        GameObject stage = Instantiate(BaseStagePrefab, spawnPosition, Quaternion.identity);
 
         Dictionary<int, GameObject> hazards = new Dictionary<int, GameObject>();
         foreach (int item in stagePart.Keys)
@@ -26,9 +26,9 @@ public class StagePartBuilder : MonoBehaviour
         return stage;
     }
 
-    public GameObject CreateStageByStagePart(Dictionary<int, int> stagePart, out List<GameObject> interactableHazards)
+    public GameObject CreateStageByStagePart(Dictionary<int, int> stagePart, Vector3 spawnPosition, out List<GameObject> interactableHazards)
     {
-        GameObject stage = Instantiate(BaseStagePrefab);
+        GameObject stage = Instantiate(BaseStagePrefab, spawnPosition, Quaternion.identity);
         interactableHazards = new List<GameObject>();
 
         Dictionary<int, GameObject> hazards = new Dictionary<int, GameObject>();
