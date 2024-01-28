@@ -221,8 +221,8 @@ public class StagePartEditor : MonoBehaviour
 
     public void FinishEditAndSend()
     {
-        //List<GameObject> test;
-        //stageBuilder.CreateStageByStagePart(placedHazards, out test);
+        List<GameObject> test;
+        stageBuilder.CreateStageByStagePart(placedHazards, Vector3.zero, out test);
         if (NetManager.singleton != null)
         {
             NetManager.singleton.LocalObserver.CmdSendLevel(new List<int>(placedHazards.Keys), new List<int>(placedHazards.Values));

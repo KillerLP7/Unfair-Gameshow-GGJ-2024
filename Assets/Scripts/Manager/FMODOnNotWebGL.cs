@@ -11,7 +11,6 @@ public class FMODOnNotWebGL : MonoBehaviour
 #elif UNITY_SERVER
 #else
         StudioListener listener = gameObject.AddComponent<StudioListener>();
-        listener.attenuationObject = gameObject;
 #endif
     }
 }

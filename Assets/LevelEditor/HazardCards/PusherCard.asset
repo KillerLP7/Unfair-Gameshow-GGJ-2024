@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8745a2d66980bbb4d9a72d8133842e1d, type: 3}
+  m_Name: PusherCard
+  m_EditorClassIdentifier: 
+  Name: 
+  hazardPrefab: {fileID: 1431028855483357276, guid: 23922f3a22a7b6244a78795ffb70ade6, type: 3}
+  hazardSprite: {fileID: 0}
+  size: 1
+  xOffset: 0
+  yOffset: 0
+  isInteractable: 1

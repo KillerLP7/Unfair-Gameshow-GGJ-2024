@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _spawnPoint;
     [SerializeField] private PlayerController _playerPrefab;
     [SerializeField] private CameraFollow _cameraFollow;
-    [SerializeField] private float x;
+    [SerializeField] private float nextStageOffsetX = 10;
+    [SerializeField] private int maximumLoadedStages = 10;
     [SerializeField] GameObject stageBuilderPrefab;
     [SerializeField] StagePartBuilder stageBuilder;
     public StagePartBuilder StageBuilder
@@ -101,13 +102,13 @@ public class GameManager : MonoBehaviour
     public void LoadNextStage()
     {
 
-        if (createdStageObjects.Count >= 5)
+        if (createdStageObjects.Count >= maximumLoadedStages)
         {
             Destroy(createdStageObjects[0]);
             createdStageObjects.RemoveAt(0);
         }
         //stagePos = Vector3.zero;
-        stagePos.x += x;
+        stagePos.x += nextStageOffsetX;
         //Random.Range(0, )
         GameObject levelToLoad;
         List<GameObject> levelObj;
