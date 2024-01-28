@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.SceneManagement.SceneManager;
 
 public class StartScreenMainMenu : MonoBehaviour
 {
@@ -10,8 +6,13 @@ public class StartScreenMainMenu : MonoBehaviour
 
     private void Start()
     {
+#if UNITY_SERVER
+        gameObject.SetActive(false);
+        matchList.SetActive(true);
+#endif
         SoundManager.Instance.PlayTitleTheme();
     }
+
     public void ShowMatchList()
     {
         matchList.SetActive(true);
