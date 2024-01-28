@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class NetworkPlayer : NetworkBehaviour
 {
@@ -21,7 +22,7 @@ public class NetworkPlayer : NetworkBehaviour
     }
 
     [TargetRpc]
-    public void SetLevel(List<int> a, List<int> b, int id)
+    public void SetLevel(List<int> a, List<int> b, uint id)
     {
         if (!isLocalPlayer) return;
 
@@ -35,7 +36,7 @@ public class NetworkPlayer : NetworkBehaviour
     }
 
     [TargetRpc]
-    public void Interact(int toInteract, int netID)
+    public void Interact(int toInteract, uint netID)
     {
         if (!isLocalPlayer) return;
         GameManager.Instance.ObserverInteractWithLevel(netID, toInteract);
@@ -43,20 +44,38 @@ public class NetworkPlayer : NetworkBehaviour
     }
 
     [Command]
-    public void CmdLevelLoaded(int pObserverID, int amountOfStuffToInteractWith)
+    public void CmdLevelLoaded(uint pObserverID, int amountOfStuffToInteractWith)
     {
-        NetworkObserver observer = NetManager.singleton.Observers.First(x => x.netId == pObserverID);
-        if (observer == null) return;
+        NetworkObserver guy = null;
+        foreach (NetworkObserver item in NetManager.singleton.Observers)
+        {
+            if (item.netIdentity.netId == pObserverID)
+                guy = item;
+        }
+        if (guy == null)
+        {
+            print("ffffffff");
+            return;
+        }
 
-        observer.SetSubmittedLevelInteractable(amountOfStuffToInteractWith);
+        guy.SetSubmittedLevelInteractable(amountOfStuffToInteractWith);
     }
 
     [Command]
-    public void CmdLevelFinshed(int pObserverID)
+    public void CmdLevelFinshed(uint pObserverID)
     {
-        NetworkObserver observer = NetManager.singleton.Observers.First(x => x.netId == pObserverID);
-        if (observer == null) return;
+        NetworkObserver guy = null;
+        foreach (NetworkObserver item in NetManager.singleton.Observers)
+        {
+            if (item.netIdentity.netId == pObserverID)
+                guy = item;
+        }
+        if (guy == null)
+        {
+            print("ffffffff");
+            return;
+        }
 
-        observer.SubmittedLevelFinished();
+        guy.SubmittedLevelFinished();
     }
 }

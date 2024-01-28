@@ -138,8 +138,9 @@ MonoBehaviour:
   _spawnPoint: {fileID: 0}
   _playerPrefab: {fileID: 5381703138919200112, guid: 3f2df9d53d9969741965534e88090783, type: 3}
   _cameraFollow: {fileID: 0}
-  x: 10
-  stageBuilderPrefab: {fileID: 0}
+  nextStageOffsetX: 10
+  maximumLoadedStages: 10
+  stageBuilderPrefab: {fileID: 5214360002662498368, guid: a50ef70b97424314c8c952ee4e0c5335, type: 3}
   stageBuilder: {fileID: 0}
   stageParts:
   - {fileID: 9202602265068847406, guid: 9c7d8676ea4b937419a3e7bddaaec37a, type: 3}

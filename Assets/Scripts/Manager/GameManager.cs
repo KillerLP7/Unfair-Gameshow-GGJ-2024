@@ -1,13 +1,12 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
+[System.Serializable]
 public class playerCreatedLevel
 {
     public GameObject level;
-    public int iD;
+    public uint iD;
     public List<GameObject> triggerObj;
 }
 public class GameManager : MonoBehaviour
@@ -38,10 +37,10 @@ public class GameManager : MonoBehaviour
     private PlayerController _player;
     private GameObject _lastCheckPoint;
     private Vector3 stagePos;
-    private List<Dictionary<int, int>> _playerLevels = new List<Dictionary<int, int>>();
+    private List<Tuple<Dictionary<int, int>, uint>> _playerLevels = new();   
     private List<playerCreatedLevel> _playerCreatedLevels = new();
     private Dictionary<int, int> _playerLevel;
-    private int _lastPlayerID = -1;
+    private uint _lastPlayerID = 0;
     private bool _bFirstLevelLoad = true;
 
     public static GameManager Instance { get; private set; }
@@ -106,7 +105,6 @@ public class GameManager : MonoBehaviour
     //TODO: add _cameraFollow.SetBounds(_player.transform.position.x, _player.transform.position.y); To limmet the camera movment on the left side
     public void LoadNextStage()
     {
-
         if (createdStageObjects.Count >= maximumLoadedStages)
         {
             Destroy(createdStageObjects[0]);
@@ -125,7 +123,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                randomLevelNR = Random.Range(0, stageParts.Length);
+                randomLevelNR = UnityEngine.Random.Range(0, stageParts.Length);
             }
            
             levelToLoad = Instantiate(stageParts[randomLevelNR], stagePos, Quaternion.identity);
@@ -133,8 +131,9 @@ public class GameManager : MonoBehaviour
         else
         {
             playerCreatedLevel tempPlayerLevel = new playerCreatedLevel();
-            tempPlayerLevel.level = StageBuilder.CreateStageByStagePart(_playerLevels[0], stagePos, out tempPlayerLevel.triggerObj);
-            tempPlayerLevel.iD = _playerLevels.First()[0];
+            tempPlayerLevel.level = StageBuilder.CreateStageByStagePart(_playerLevels[0].Item1, stagePos, out tempPlayerLevel.triggerObj);
+            tempPlayerLevel.iD = _playerLevels[0].Item2;
+            _playerLevels.RemoveAt(0);
             _playerCreatedLevels.Add(tempPlayerLevel);
             levelToLoad = tempPlayerLevel.level;
         }
@@ -143,10 +142,10 @@ public class GameManager : MonoBehaviour
 
     public void CheckIsLevelPartByPlayer(GameObject pLevel)
     {
-        if (_lastPlayerID >= 0)
+        if (_lastPlayerID != 0)
             LevelFinshedFromOberverX(_lastPlayerID);
 
-        _lastPlayerID = -1;
+        _lastPlayerID = 0;
         foreach (var item in _playerCreatedLevels)
         {
             if (item.level == pLevel)
@@ -157,24 +156,24 @@ public class GameManager : MonoBehaviour
         }
     }
     // int id = Id of the Observer / levelcreator
-    public void SetLevel(Dictionary<int, int> level, int id)
+    public void SetLevel(Dictionary<int, int> level, uint id)
     {
-        _playerLevels.Append(level);
+        _playerLevels.Add(new Tuple<Dictionary<int, int>, uint>(level, id));
     }
 
     // Nofify that observers level is ready loaded
-    public void LevelLoadedFromOberverX(int pOberverID, int amountOfStuffToInteractWith)
+    public void LevelLoadedFromOberverX(uint pOberverID, int amountOfStuffToInteractWith)
     {
         NetManager.singleton.Player.CmdLevelLoaded(pOberverID, amountOfStuffToInteractWith);
     }
 
     // Nofify that observers level is finished (player run throug)
-    public void LevelFinshedFromOberverX(int pOberverID)
+    public void LevelFinshedFromOberverX(uint pOberverID)
     {
         NetManager.singleton.Player.CmdLevelFinshed(pOberverID);
     }
     // Observer interacts with level
-    public void ObserverInteractWithLevel(int netId, int interactable)
+    public void ObserverInteractWithLevel(uint netId, int interactable)
     {
         if (!(_lastPlayerID == netId)) return;
         foreach (var classItem in _playerCreatedLevels)
