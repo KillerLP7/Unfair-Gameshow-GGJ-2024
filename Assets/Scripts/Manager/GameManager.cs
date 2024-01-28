@@ -42,7 +42,11 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _spawnPoint = SpawnPoint.Instance.gameObject;
+        if (SpawnPoint.Instance != null)
+        {
+            _spawnPoint = SpawnPoint.Instance.gameObject;
+        }
+        Debug.Log(_spawnPoint.transform.ToString());
         _player = Instantiate(_playerPrefab, _spawnPoint.transform.position, Quaternion.identity);
         _cameraFollow = Camera.main.GetComponent<CameraFollow>();
         _cameraFollow.toFollow = _player.gameObject;
