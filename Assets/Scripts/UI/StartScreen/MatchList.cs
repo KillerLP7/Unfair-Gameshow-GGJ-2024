@@ -141,6 +141,7 @@ public class MatchList : MonoBehaviour
 
     public void HostMatch()
     {
+        Globals.wantsMainPlayer = true;
         NetManager.singleton.StartHost();
         Destroy(gameObject);
     }

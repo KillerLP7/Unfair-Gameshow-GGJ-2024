@@ -2016,7 +2016,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 68988604489937744}
         m_TargetAssemblyTypeName: MatchList, Assembly-CSharp
-        m_MethodName: HostServer
+        m_MethodName: HostMatch
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

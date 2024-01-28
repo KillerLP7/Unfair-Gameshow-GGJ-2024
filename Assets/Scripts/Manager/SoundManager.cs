@@ -16,6 +16,8 @@ public class SoundManager : MonoBehaviour
     EventInstance jumpInstance;
     [SerializeField] EventReference fireRefStrings;
     EventInstance fireInstance;
+    [SerializeField] EventReference stepRefStrings;
+    EventInstance stepInstance;
     public static SoundManager Instance { get; private set; }
 
     private void Awake()
@@ -59,5 +61,12 @@ public class SoundManager : MonoBehaviour
         jumpInstance = FMODUnity.RuntimeManager.CreateInstance(jumpRefStrings);
         jumpInstance.start();
         jumpInstance.release();
+    }
+    public void PlayStepSound()
+    {
+        print("DeathSound");
+        stepInstance = FMODUnity.RuntimeManager.CreateInstance(stepRefStrings);
+        stepInstance.start();
+        stepInstance.release();
     }
 }

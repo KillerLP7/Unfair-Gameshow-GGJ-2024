@@ -287,6 +287,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3756224705581351550, guid: 9748cd75e82ca8b429476d64a082e0f7, type: 3}
       insertIndex: 4
       addedObject: {fileID: 1891090158}
+    - targetCorrespondingSourceObject: {fileID: 3756224705581351550, guid: 9748cd75e82ca8b429476d64a082e0f7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6783900465641139707}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9748cd75e82ca8b429476d64a082e0f7, type: 3}
 --- !u!224 &1416764911 stripped
@@ -562,9 +565,11 @@ MonoBehaviour:
   disconnectInactiveTimeout: 60
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 4605335223668777827, guid: e7efebfa9ead0bb468cce245cb03d14c, type: 3}
-  autoCreatePlayer: 1
+  autoCreatePlayer: 0
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 343318565293803806, guid: 0a7fece940bf80943a1467af99240af7, type: 3}
+  - {fileID: 2761009022929411868, guid: 2dbbc61524db214488efc2e44c7a4cd4, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
     bufferTimeMultiplier: 2
@@ -583,8 +588,23 @@ MonoBehaviour:
   connected:
     m_PersistentCalls:
       m_Calls: []
-  networkPlayerPrefab: {fileID: 0}
-  networkObserverPrefab: {fileID: 0}
+  networkPlayerPrefab: {fileID: 3751410976255601535, guid: 2dbbc61524db214488efc2e44c7a4cd4, type: 3}
+  networkObserverPrefab: {fileID: 6171650962971811781, guid: 0a7fece940bf80943a1467af99240af7, type: 3}
+--- !u!4 &6783900465641139707
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9173248915093865401}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 219.08607, y: -72.3403, z: 5913.55}
+  m_LocalScale: {x: 108, y: 108, z: 108}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1416764911}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7898187918647115762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -630,6 +650,77 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9173248915093865401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6783900465641139707}
+  - component: {fileID: 9181013909890433772}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &9181013909890433772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9173248915093865401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a311b73f0680dc64482dd042c6d73034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathRefStrings:
+    Guid:
+      Data1: -99708567
+      Data2: 1122324784
+      Data3: 328290190
+      Data4: -1253474839
+    Path: event:/game_over
+  duckRefStrings:
+    Guid:
+      Data1: -165704960
+      Data2: 1145501259
+      Data3: 636357002
+      Data4: -1326518912
+    Path: event:/enemy_duck-like_appears
+  flingRefStrings:
+    Guid:
+      Data1: 418784615
+      Data2: 1339142901
+      Data3: 434938798
+      Data4: 113733667
+    Path: event:/player_cannon_shot
+  jumpRefStrings:
+    Guid:
+      Data1: -1779321399
+      Data2: 1254237825
+      Data3: 2011984831
+      Data4: -175305206
+    Path: event:/player_jumping
+  fireRefStrings:
+    Guid:
+      Data1: 418784615
+      Data2: 1339142901
+      Data3: 434938798
+      Data4: 113733667
+    Path: event:/player_cannon_shot
+  stepRefStrings:
+    Guid:
+      Data1: -100613777
+      Data2: 1132770080
+      Data3: -1517198414
+      Data4: 1198234182
+    Path: event:/steps
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
