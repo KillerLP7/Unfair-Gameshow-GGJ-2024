@@ -25,11 +25,22 @@ public class NetworkObserver : NetworkBehaviour
     [Command]
     public void CmdSendLevel(List<int> a, List<int> b)
     {
+        SetLevel(a, b, Conn.connectionId);
         NetworkPlayer player = NetManager.singleton!.Player;
         if (player == null)
             return;
 
        player.SetLevel(a, b, Conn.connectionId);
+    }
+
+    [Server]
+    public void SetLevel(List<int> a, List<int> b, int id)
+    {
+        NetworkPlayer player = NetManager.singleton!.Player;
+        if (player == null)
+            return;
+
+        player.SetLevel(a, b, Conn.connectionId);
     }
 
     [ClientRpc]
