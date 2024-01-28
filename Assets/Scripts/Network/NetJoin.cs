@@ -26,18 +26,15 @@ public class NetJoin : MonoBehaviour
     public IEnumerator HostMatch(UnityAction<bool> onFinished)
     {       
         print(NetManager.singleton.networkAddress);
-        SimpleWebTransport trans = NetManager.singleton.transport as SimpleWebTransport; ;
+        SimpleWebTransport trans = NetManager.singleton.transport as SimpleWebTransport;
 
-        string ip = GetLocalIPAddress();
-        int port = trans.port;
-        string name = "Test";
+        string jsonData = JsonUtility.ToJson(new { name = "Test", ip = GetLocalIPAddress(), port = trans.port.ToString() });
+        byte[] postData = System.Text.Encoding.UTF8.GetBytes(jsonData);
 
-        Dictionary<string, string> data = new Dictionary<string, string>();
-        data["name"] = name;
-        data["ip"] = ip;
-        data["port"] = port.ToString();
-
-        using UnityWebRequest request = UnityWebRequest.Post("http://rhyth.de:9025/match", data);
+        using UnityWebRequest request = new UnityWebRequest("https://rhyth.de/match", "POST");
+        request.uploadHandler = (UploadHandler)new UploadHandlerRaw(postData);
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
 
         yield return request.SendWebRequest();
 
@@ -60,7 +57,7 @@ public class NetJoin : MonoBehaviour
 
     public IEnumerator GetAllMatches(UnityAction<List<Match>> onGottenMatches)
     {
-        using UnityWebRequest request = UnityWebRequest.Get("http://rhyth.de:9025/match");
+        using UnityWebRequest request = UnityWebRequest.Get("https://rhyth.de/match");
         yield return request.SendWebRequest();
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {

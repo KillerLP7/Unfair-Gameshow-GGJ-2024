@@ -12,7 +12,7 @@ public class MovingEnemy : MonoBehaviour
     [SerializeField] private LayerMask _groundCheckLayerMask;
     [SerializeField] private LayerMask _playerCheckLayerMask;
     private float _capsuleWidth;
-    private Vector3 sizeVector = new Vector3(1.5f, 1.5f, 0.0f);
+    private Vector3 sizeVector = new Vector3(1.2f, 1.2f, 0.0f);
     // Start is called before the first frame update
     void Start()
     {
