@@ -64,7 +64,6 @@ public class SoundManager : MonoBehaviour
     }
     public void PlayStepSound()
     {
-        print("DeathSound");
         stepInstance = FMODUnity.RuntimeManager.CreateInstance(stepRefStrings);
         stepInstance.start();
         stepInstance.release();

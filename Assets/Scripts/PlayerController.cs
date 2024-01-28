@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
         //Check if player can move left, and if the Input Action "left" is getting pressed
         Vector2 moveVector = _moveAction.ReadValue<Vector2>();
         moveVector.x *= (_speed * speedMod);
-        SoundManager.Instance.PlayStepSound();
+        //when speed enough SoundManager.Instance.PlayStepSound();
         if (!(transform.position.x + moveVector.x <= _leftBound))
         {
             _rb.velocity = new Vector2(moveVector.x, _rb.velocity.y);
