@@ -16,7 +16,7 @@ public class NetworkObserver : NetworkBehaviour
     {
         base.OnStartLocalPlayer();
 
-        SceneManager.LoadScene("scenes/StageEditorScene");
+        SceneManager.LoadScene("scenes/StageEditorScene", LoadSceneMode.Additive);
         Destroy(UIManager.Instance.gameObject);
 
         NetManager.singleton.LocalObserver = this;
@@ -29,7 +29,7 @@ public class NetworkObserver : NetworkBehaviour
         if (player == null)
             return;
 
-       //player.SetLevel(level);
+       player.SetLevel(a, b);
     }
 
     [ClientRpc]
