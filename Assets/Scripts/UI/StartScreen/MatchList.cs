@@ -19,6 +19,9 @@ public class MatchList : MonoBehaviour
     [SerializeField] private string primaryIp;
     [SerializeField] private ushort primaryPort;
 
+    [SerializeField] private bool showHostButton = true;
+    [SerializeField] private Button hostButton;
+
     private ExtendedCoroutine connectedRoutine;
     private bool connectToPrimary = false;
 
@@ -26,18 +29,22 @@ public class MatchList : MonoBehaviour
     {
         NetManager.singleton.connected.AddListener(OnConnected);
 
+        if (showHostButton)
+            hostButton.gameObject.SetActive(true);
+
 #if UNITY_WEBGL
 
 #elif UNITY_SERVER
         HostServer();
 #else
-        HostMatch();
+
 #endif
     }
 
     private void OnDestroy()
     {
-        NetManager.singleton.connected.RemoveListener(OnConnected);
+        if (NetManager.singleton != null)
+            NetManager.singleton.connected.RemoveListener(OnConnected);
     }
 
     public void OnTryToConnect()
