@@ -42,6 +42,6 @@ public class StagePartBuilder : MonoBehaviour
             }
         }
 
-        return null;
+        return stage;
     }
 }
