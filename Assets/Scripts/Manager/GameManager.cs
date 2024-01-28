@@ -82,6 +82,11 @@ public class GameManager : MonoBehaviour
         createdStageObjects.Add(Instantiate(stageParts[0], stagePos, Quaternion.identity));
     }
 
+    public void SetLevel(Dictionary<int, int> level)
+    {
+
+    }
+
     public void DestroyStage()
     {
         createdStageObjects.RemoveAt(0);

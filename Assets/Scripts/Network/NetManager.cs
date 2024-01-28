@@ -210,6 +210,12 @@ public class NetManager : NetworkManager
     {
         connected.Invoke();
         base.OnClientConnect();
+
+        print("Hello message");
+        HelloMessage helloMessage = new HelloMessage();
+        helloMessage.name = Globals.playerName;
+        helloMessage.wantsToBePlayer = Globals.wantsMainPlayer;
+        NetworkClient.Send(helloMessage);
     }
 
     /// <summary>
@@ -262,12 +268,6 @@ public class NetManager : NetworkManager
     public override void OnStartClient()
     {
         base.OnStartClient();
-
-        print("Hello message");
-        HelloMessage helloMessage = new HelloMessage();
-        helloMessage.name = Globals.playerName;
-        helloMessage.wantsToBePlayer = Globals.wantsMainPlayer;
-        NetworkClient.Send(helloMessage);
     }
 
     /// <summary>

@@ -1,4 +1,6 @@
 using Mirror;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class NetworkObserver : NetworkBehaviour
 {
@@ -12,7 +14,20 @@ public class NetworkObserver : NetworkBehaviour
 
     public override void OnStartLocalPlayer()
     {
-        // Load 
+        base.OnStartLocalPlayer();
+
+        SceneManager.LoadScene("scenes/StageEditorScene");
+        Destroy(UIManager.Instance.gameObject);
+    }
+
+    [Command]
+    public void CmdSendLevel(List<int> a, List<int> b)
+    {
+        NetworkPlayer player = NetManager.singleton!.Player;
+        if (player == null)
+            return;
+
+       //player.SetLevel(level);
     }
 
     [ClientRpc]
@@ -22,7 +37,7 @@ public class NetworkObserver : NetworkBehaviour
     }
 
     [Command]
-    public void Interact(int toInteract)
+    public void CmdInteract(int toInteract)
     {
 
     }
