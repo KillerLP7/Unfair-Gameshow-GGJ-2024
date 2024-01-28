@@ -44,3 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 324101e0e21b56643a5611343269ccf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BaseStagePrefab: {fileID: 3151065576059647487, guid: 7c1c4e28fc9e3c04684ffb4dd2d0d58c, type: 3}
+  yOffsetOfHazards: 2.5
+  xOffsetHeightOfHazards: 5
+  allStageHazards:
+  - {fileID: 11400000, guid: 8c0c8b1ebdc78b349818fea8bda54846, type: 2}
+  - {fileID: 11400000, guid: 2ef2d7641ddddac499ae83f696cb3755, type: 2}
+  - {fileID: 11400000, guid: 5dd02dba51f1d3d4bb5e661e6f449231, type: 2}

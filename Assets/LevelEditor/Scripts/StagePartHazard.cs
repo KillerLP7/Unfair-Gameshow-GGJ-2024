@@ -9,4 +9,7 @@ public class StagePartHazard : ScriptableObject
     public GameObject hazardPrefab;
     public Sprite hazardSprite;
     public int size = 1;
+    public float xOffset = 1;
+    public float yOffset = 1;
+    public bool isInteractable = false;
 }

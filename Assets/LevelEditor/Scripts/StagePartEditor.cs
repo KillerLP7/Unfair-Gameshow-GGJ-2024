@@ -207,11 +207,15 @@ public class StagePartEditor : MonoBehaviour
 
     public void ActivateManualActivation(int index)
     {
-
+        if (NetManager.singleton != null)
+        {
+            NetManager.singleton.LocalObserver.CmdInteract(index);
+        }
     }
 
     public void FinishEditAndSend()
     {
+        stageBuilder.CreateStageByStagePart(placedHazards);
         if (NetManager.singleton != null)
         {
             NetManager.singleton.LocalObserver.CmdSendLevel(new List<int>(placedHazards.Keys), new List<int>(placedHazards.Values));

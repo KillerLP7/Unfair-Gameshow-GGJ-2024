@@ -9,6 +9,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerController _playerPrefab;
     [SerializeField] private CameraFollow _cameraFollow;
     [SerializeField] private float x;
+    [SerializeField] GameObject stageBuilderPrefab;
+    [SerializeField] StagePartBuilder stageBuilder;
+    public StagePartBuilder StageBuilder
+    {
+        get
+        {
+            if (stageBuilder == null)
+            {
+                stageBuilder = Instantiate(stageBuilderPrefab).GetComponent<StagePartBuilder>();
+            }
+            return stageBuilder;
+        }
+    }
 
     private List<GameObject> createdStageObjects = new List<GameObject>();
 
