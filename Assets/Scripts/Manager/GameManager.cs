@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     private List<GameObject> createdStageObjects = new List<GameObject>();
 
+
+
     private PlayerController _player;
     private GameObject _lastCheckPoint;
     private Vector3 stagePos;
@@ -47,7 +49,6 @@ public class GameManager : MonoBehaviour
     {
 
     }
-    //TODO::loadLevel
     //TODO:: void TriggerObs(int 0) if Aktuelller spielr = client
     //lsite mit objekten von Aktuellen Spieler �n der Scene
     public void PlayerDeath()

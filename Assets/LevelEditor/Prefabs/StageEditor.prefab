@@ -46,6 +46,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageBuilder: {fileID: 772766714167763754}
+  hazardToolboxContent: {fileID: 0}
+  hazardToolboxElementPrefab: {fileID: 4447810649615258547, guid: f44012d8e5e15614abcd4a39397649c3, type: 3}
+  hazardGridDisplayedPrefab: {fileID: 8415134917165101086, guid: 5674b875a36017a4b960d526fa281285, type: 3}
+  manualActivationButtons: []
+  stageGrid: {fileID: 0}
+  gridLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  verticalCellLine: 1
+  maxAvailablePoints: 5
+  spaceRequiredBeetweenHazards: 1
+  availablePointsText: {fileID: 0}
+  maxPointsText: {fileID: 0}
 --- !u!1001 &7212394546231311954
 PrefabInstance:
   m_ObjectHideFlags: 0

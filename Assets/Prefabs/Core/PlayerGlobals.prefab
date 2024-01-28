@@ -82,6 +82,8 @@ MonoBehaviour:
   connected:
     m_PersistentCalls:
       m_Calls: []
+  networkPlayerPrefab: {fileID: 0}
+  networkObserverPrefab: {fileID: 0}
 --- !u!114 &7898187917902280632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,11 +336,11 @@ MonoBehaviour:
     Path: event:/enemy_duck-like_appears
   flingRefStrings:
     Guid:
-      Data1: 418784615
-      Data2: 1339142901
-      Data3: 434938798
-      Data4: 113733667
-    Path: event:/player_cannon_shot
+      Data1: -1814010060
+      Data2: 1155236227
+      Data3: 2137638528
+      Data4: -692617015
+    Path: event:/enemy_flying_appears
   jumpRefStrings:
     Guid:
       Data1: -1779321399
@@ -353,3 +355,10 @@ MonoBehaviour:
       Data3: 434938798
       Data4: 113733667
     Path: event:/player_cannon_shot
+  stepRefStrings:
+    Guid:
+      Data1: -100613777
+      Data2: 1132770080
+      Data3: -1517198414
+      Data4: 1198234182
+    Path: event:/steps

@@ -9,6 +9,7 @@ public class StagePartEditor : MonoBehaviour
     [SerializeField] private StagePartBuilder stageBuilder;
     [SerializeField] private RectTransform hazardToolboxContent;
     [SerializeField] private GameObject hazardToolboxElementPrefab;
+    [SerializeField] private GameObject hazardGridDisplayedPrefab;
 
     [SerializeField] private Button[] manualActivationButtons;
 
@@ -20,9 +21,9 @@ public class StagePartEditor : MonoBehaviour
     [SerializeField] bool spaceRequiredBeetweenHazards = true;
     [SerializeField] TextMeshProUGUI availablePointsText;
     [SerializeField] TextMeshProUGUI maxPointsText;
-    int currentUsedPoints 
-    { 
-        get 
+    int currentUsedPoints
+    {
+        get
         {
             int points = 0;
             foreach (int item in placedHazards.Values)
@@ -45,6 +46,7 @@ public class StagePartEditor : MonoBehaviour
         canvas = stageGrid.transform.GetComponentInParent<Canvas>();
         CreateToolbox();
         SetManualActivationKeysActive(0);
+        SelectHazardToPlace(0);
         if (maxPointsText != null)
         {
             maxPointsText.text = "" + (maxAvailablePoints);
@@ -60,7 +62,7 @@ public class StagePartEditor : MonoBehaviour
 
         if (availablePointsText != null)
         {
-            availablePointsText.text = ""+(maxAvailablePoints - currentUsedPoints);
+            availablePointsText.text = "" + (maxAvailablePoints - currentUsedPoints);
         }
     }
 
@@ -93,9 +95,11 @@ public class StagePartEditor : MonoBehaviour
 
             newHazardToolboxEntry.GetComponent<Button>().onClick.AddListener(() => { SelectHazardToPlace(currentIterator); });
             newHazardToolboxEntry.transform.Find("Icon").GetComponent<Image>().sprite = hazard.hazardSprite;
+            newHazardToolboxEntry.transform.Find("SelectedBackground").gameObject.SetActive(false);
+
             if (hazard.size > 0)
             {
-                newHazardToolboxEntry.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text = "" + hazard.size; 
+                newHazardToolboxEntry.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text = "" + hazard.size;
             }
             else
             {
@@ -112,6 +116,10 @@ public class StagePartEditor : MonoBehaviour
     {
         currentSelectedHazard = index;
         Debug.Log(currentSelectedHazard);
+        for (int i = 0; i < activeHazardToolboxElements.Count; i++)
+        {
+            activeHazardToolboxElements[i].transform.Find("SelectedBackground").gameObject.SetActive(i == index);
+        }
     }
 
     private void PlaceHazardInGridAtPos(Vector3 targetPosition)
@@ -154,7 +162,9 @@ public class StagePartEditor : MonoBehaviour
                         }
                     }
                     placedHazards[cell.x] = currentSelectedHazard;
-                    displayedHazardIcons[cell.x] = Instantiate(stageBuilder.AllStageHazards[currentSelectedHazard].hazardPrefab, stageGrid.CellToWorld(new Vector3Int(cell.x, verticalCellLine)), Quaternion.identity, canvas.transform).transform;
+                    displayedHazardIcons[cell.x] = Instantiate(hazardGridDisplayedPrefab, stageGrid.CellToWorld(new Vector3Int(cell.x, verticalCellLine)), Quaternion.identity, stageGrid.transform).transform;
+                    displayedHazardIcons[cell.x].Find("Icon").GetComponent<Image>().sprite = stageBuilder.AllStageHazards[currentSelectedHazard].hazardSprite;
+                    displayedHazardIcons[cell.x].Find("ExtraSizeBlocker").GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, displayedHazardIcons[cell.x].GetComponent<RectTransform>().rect.width * stageBuilder.AllStageHazards[currentSelectedHazard].size);
                 }
             }
         }
@@ -168,7 +178,7 @@ public class StagePartEditor : MonoBehaviour
             if (placedHazards.ContainsKey(cellX + i))
             {
                 toCLose = true;
-            } 
+            }
         }
         int highestkey = -1;
         foreach (int item in placedHazards.Keys)
@@ -202,7 +212,21 @@ public class StagePartEditor : MonoBehaviour
 
     public void FinishEditAndSend()
     {
+        if (NetManager.singleton != null)
+        {
+            NetManager.singleton.LocalObserver.CmdSendLevel(new List<int>(placedHazards.Keys), new List<int>(placedHazards.Values));
+        }
+        foreach (int item in placedHazards.Keys)
+        {
+            Destroy(displayedHazardIcons[item].gameObject);
+        }
+        displayedHazardIcons.Clear();
+        placedHazards.Clear();
+    }
 
+    public void ClickOnGrid()
+    {
+        PlaceHazardInGridAtPos(Input.mousePosition);
     }
 
     private void OnDrawGizmos()
@@ -213,11 +237,11 @@ public class StagePartEditor : MonoBehaviour
             RectTransform rt = stageGrid.transform.GetComponent<RectTransform>();
             int cellVerticalCount = (int)(rt.rect.height / stageGrid.cellSize.y);
             int cellHorizontalCount = (int)(rt.rect.width / stageGrid.cellSize.x);
-            for (int i = 0; i < cellHorizontalCount+1; i++)
+            for (int i = 0; i < cellHorizontalCount + 1; i++)
             {
                 Gizmos.DrawLine(stageGrid.CellToWorld(new Vector3Int(i, 0)), stageGrid.CellToWorld(new Vector3Int(i, cellVerticalCount)));
             }
-            for (int i = 0; i < cellVerticalCount+1; i++)
+            for (int i = 0; i < cellVerticalCount + 1; i++)
             {
                 Gizmos.DrawLine(stageGrid.CellToWorld(new Vector3Int(0, i)), stageGrid.CellToWorld(new Vector3Int(cellHorizontalCount, i)));
             }
