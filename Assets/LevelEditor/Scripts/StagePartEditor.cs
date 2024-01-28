@@ -6,6 +6,8 @@ using TMPro;
 
 public class StagePartEditor : MonoBehaviour
 {
+    public static StagePartEditor instance;
+
     [SerializeField] private StagePartBuilder stageBuilder;
     [SerializeField] private RectTransform hazardToolboxContent;
     [SerializeField] private GameObject hazardToolboxElementPrefab;
@@ -40,6 +42,11 @@ public class StagePartEditor : MonoBehaviour
     private List<RectTransform> activeHazardToolboxElements = new List<RectTransform>();
     private int currentSelectedHazard = 0;
     private Canvas canvas;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
