@@ -307,8 +307,6 @@ public class NetManager : NetworkManager
         public int pObserverID;
     }
 
-    public 
-
 
     #region Messages
     private void OnHelloMessage(NetworkConnectionToClient conn, HelloMessage message)
