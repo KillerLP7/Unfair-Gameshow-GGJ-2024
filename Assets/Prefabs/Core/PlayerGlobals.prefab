@@ -274,7 +274,8 @@ MonoBehaviour:
   _spawnPoint: {fileID: 0}
   _playerPrefab: {fileID: 5381703138919200112, guid: 3f2df9d53d9969741965534e88090783, type: 3}
   _cameraFollow: {fileID: 0}
-  x: 10
+  nextStageOffsetX: 10
+  maximumLoadedStages: 10
   stageBuilderPrefab: {fileID: 5214360002662498368, guid: a50ef70b97424314c8c952ee4e0c5335, type: 3}
   stageBuilder: {fileID: 0}
   stageParts: []
@@ -364,3 +365,17 @@ MonoBehaviour:
       Data3: -1517198414
       Data4: 1198234182
     Path: event:/steps
+  titleThemeRefStrings:
+    Guid:
+      Data1: -1355722489
+      Data2: 1237639538
+      Data3: -1330915935
+      Data4: 1390357150
+    Path: event:/BGM/title_screen_bgm
+  mainThemeRefStrings:
+    Guid:
+      Data1: -285439227
+      Data2: 1286169683
+      Data3: 1805651899
+      Data4: -2118227443
+    Path: event:/BGM/level_1_bgm

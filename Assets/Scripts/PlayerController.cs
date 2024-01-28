@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
         _bIsMoving = false;
         speedMod = 1.0f;
         SetBound(9);
+        SoundManager.Instance.PlayMainTheme();
     }
     void Awake()
     {
