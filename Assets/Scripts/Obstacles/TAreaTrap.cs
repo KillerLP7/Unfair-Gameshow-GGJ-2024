@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TAreaTrap : BaseObs, ITriggerdObstacle
+public class TAreaTrap : BaseTriggerdObj, ITriggerdObstacle
 {
     [SerializeField] private GameObject _areaObj;
     [SerializeField] private float _liveTime;
@@ -22,7 +22,7 @@ public class TAreaTrap : BaseObs, ITriggerdObstacle
     void Update()
     {
     }
-    public void TriggerEffect()
+    public override void TriggerEffect()
     {
         if (_triggerd) return;
         _triggerd = true;
