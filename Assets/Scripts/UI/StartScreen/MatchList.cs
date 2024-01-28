@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class MatchList : MonoBehaviour
 {
+    [SerializeField] private GameObject mainMenu;
+    
     [SerializeField] private TMP_InputField ownName;
     [SerializeField] private TMP_InputField ip;
     [SerializeField] private TMP_InputField port;
@@ -73,6 +75,7 @@ public class MatchList : MonoBehaviour
 
     public void StopTryingToConnect(bool stop = true)
     {
+        
         StopCoroutine(connectedRoutine.Coroutine);
         connectedRoutine = null;
         connectPrimaryButton.interactable = true;
@@ -144,6 +147,12 @@ public class MatchList : MonoBehaviour
         Globals.wantsMainPlayer = true;
         NetManager.singleton.StartHost();
         Destroy(gameObject);
+    }
+
+    public void ShowMainMenu()
+    {
+        mainMenu.SetActive(true);
+        gameObject.SetActive(false);
     }
 
 }
