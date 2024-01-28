@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Mirror;
+using UnityEngine.Events;
 
 /*
 	Documentation: https://mirror-networking.gitbook.io/docs/components/network-manager
@@ -13,6 +14,8 @@ public class NetManager : NetworkManager
     // Overrides the base singleton so we don't
     // have to cast to this type everywhere.
     public static new NetManager singleton => (NetManager)NetworkManager.singleton;
+
+    public UnityEvent connected;
 
     /// <summary>
     /// Runs on both Server and Client
@@ -181,6 +184,7 @@ public class NetManager : NetworkManager
     /// </summary>
     public override void OnClientConnect()
     {
+        connected.Invoke();
         base.OnClientConnect();
     }
 
