@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D _boxCollider;
     private Rigidbody2D _rb;
     private float _distToGround;
-    public float speed;
+    private float _speed;
     private float speedMod;
     private bool _bIsMoving;
     private float _leftBound;
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         _distToGround = _boxCollider.bounds.extents.y;
         _bIsMoving = false;
         speedMod = 1.0f;
-        _leftBound = gameObject.transform.position.x - 6;
+        _leftBound = gameObject.transform.position.x - 2;
     }
     void Awake()
     {
@@ -53,7 +53,12 @@ public class PlayerController : MonoBehaviour
         //Check if player can move left, and if the Input Action "left" is getting pressed
         //if (!CheckCanMoveLeft() && _inputActionA.actionMaps) return;
         Vector2 moveVector = _moveAction.ReadValue<Vector2>();
-        moveVector.x *= (speed * speedMod);
+        //moveVector.x = Mathf.Clamp(gameObject.transform.position.x + moveVector.x, _leftBound, gameObject.transform.position.x + 10);
+        moveVector.x *= (_speed * speedMod);
+        if (gameObject.transform.position.x + moveVector.x <= _leftBound)
+        {
+           gameObject.transform.position = new Vector3(_leftBound, transform.position.y, 0.0f);
+        }
         //TODO::Sound
         _rb.velocity = new Vector2(moveVector.x, _rb.velocity.y);
     }
