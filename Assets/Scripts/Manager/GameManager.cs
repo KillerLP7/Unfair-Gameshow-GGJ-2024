@@ -84,7 +84,10 @@ public class GameManager : MonoBehaviour
 
     public void SetLevel(Dictionary<int, int> level)
     {
-
+        foreach (var item in level.Keys)
+        {
+            Debug.Log(item + " " + level[item]);
+        }
     }
 
     public void DestroyStage()
