@@ -19,14 +19,14 @@ public class PlayerController : MonoBehaviour
     private float speedMod;
     private bool _bIsMoving;
     private float _leftBound;
-    private InputActionAsset _inputActionA;
+    // private InputActionAsset _inputActionA;
     
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
-        _inputActionA = GetComponent<InputActionAsset>();
+       // _inputActionA = GetComponent<InputActionAsset>();
         _distToGround = _boxCollider.bounds.extents.y;
         _bIsMoving = false;
         speedMod = 1.0f;
