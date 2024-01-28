@@ -11,11 +11,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private NewControls cotrols;
     [SerializeField] private float _jumpForce;
     [SerializeField] private LayerMask _groundCheckLayerMask;
+    [SerializeField ]private float _speed;
     private InputAction _moveAction;
     private BoxCollider2D _boxCollider;
     private Rigidbody2D _rb;
     private float _distToGround;
-    private float _speed;
     private float speedMod;
     private bool _bIsMoving;
     private float _leftBound;
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         _distToGround = _boxCollider.bounds.extents.y;
         _bIsMoving = false;
         speedMod = 1.0f;
-        _leftBound = gameObject.transform.position.x - 2;
+        SetBound(9);
     }
     void Awake()
     {
@@ -51,16 +51,13 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         //Check if player can move left, and if the Input Action "left" is getting pressed
-        //if (!CheckCanMoveLeft() && _inputActionA.actionMaps) return;
         Vector2 moveVector = _moveAction.ReadValue<Vector2>();
-        //moveVector.x = Mathf.Clamp(gameObject.transform.position.x + moveVector.x, _leftBound, gameObject.transform.position.x + 10);
         moveVector.x *= (_speed * speedMod);
-        if (gameObject.transform.position.x + moveVector.x <= _leftBound)
+        //when speed enough SoundManager.Instance.PlayStepSound();
+        if (!(transform.position.x + moveVector.x <= _leftBound))
         {
-           gameObject.transform.position = new Vector3(_leftBound, transform.position.y, 0.0f);
+            _rb.velocity = new Vector2(moveVector.x, _rb.velocity.y);
         }
-        //TODO::Sound
-        _rb.velocity = new Vector2(moveVector.x, _rb.velocity.y);
     }
 
     public void OnJump(InputAction.CallbackContext ctx)
@@ -93,6 +90,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     public void SetSpeedMod(float pMod) { speedMod = pMod; }
+    public void SetBound(float pRadius) { _leftBound = gameObject.transform.position.x - pRadius; }
     public bool GetBIsMoving() { return _bIsMoving; }
     private void OnDrawGizmos()
     {

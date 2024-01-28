@@ -104,7 +104,7 @@ MonoBehaviour:
   _groundCheckLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  speed: 5
+  _speed: 6
 --- !u!114 &1869773439621036329
 MonoBehaviour:
   m_ObjectHideFlags: 0

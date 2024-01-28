@@ -259,7 +259,16 @@ public class NetManager : NetworkManager
     /// <summary>
     /// This is invoked when the client is started.
     /// </summary>
-    public override void OnStartClient() { }
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+
+        print("Hello message");
+        HelloMessage helloMessage = new HelloMessage();
+        helloMessage.name = Globals.playerName;
+        helloMessage.wantsToBePlayer = Globals.wantsMainPlayer;
+        NetworkClient.Send(helloMessage);
+    }
 
     /// <summary>
     /// This is called when a host is stopped.
@@ -281,7 +290,7 @@ public class NetManager : NetworkManager
     #region Messages
     private void OnHelloMessage(NetworkConnectionToClient conn, HelloMessage message)
     {
-        bool isPrimary = Player != null && message.wantsToBePlayer;
+        bool isPrimary = Player == null && message.wantsToBePlayer;
         if (isPrimary)
         {
             Player = Instantiate(networkPlayerPrefab);

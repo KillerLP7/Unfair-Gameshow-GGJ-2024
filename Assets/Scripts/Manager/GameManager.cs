@@ -22,14 +22,20 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        DontDestroyOnLoad(transform.parent.gameObject);
+        DontDestroyOnLoad(gameObject);
     }
     // Start is called before the first frame update
     void Start()
     {
-        // _player = Instantiate(_playerPrefab, _spawnPoint.transform.position, Quaternion.identity);
-        // _cameraFollow.toFollow = _player.gameObject;
-        // _lastCheckPoint = _spawnPoint;
+        _spawnPoint = SpawnPoint.Instance.gameObject;
+        _player = Instantiate(_playerPrefab, _spawnPoint.transform.position, Quaternion.identity);
+        _cameraFollow = Camera.main.GetComponent<CameraFollow>();
+        _cameraFollow.toFollow = _player.gameObject;
+        _lastCheckPoint = _spawnPoint;
+
+        LoadNextStage();
+        LoadNextStage();
+        LoadNextStage();
     }
 
     // Update is called once per frame
@@ -56,6 +62,9 @@ public class GameManager : MonoBehaviour
     public void UpdateCheckPoint(GameObject pCheckPoint)
     {
         _lastCheckPoint = pCheckPoint;
+        //limmit player and camera movement
+        //_cameraFollow.SetBounds(new Vector2(_player.transform.position.x, _player.transform.position.y));
+        //_player.SetBound(9);
         //TODO::Sound
     }
 

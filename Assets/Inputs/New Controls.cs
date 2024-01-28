@@ -104,17 +104,6 @@ public partial class @NewControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""3ae9222a-8e0a-4772-b29b-76aacd837f67"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""54e11e4c-1246-4839-90c8-d17eef55cc4d"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
