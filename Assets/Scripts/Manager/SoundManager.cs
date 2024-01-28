@@ -21,10 +21,8 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] EventReference titleThemeRefStrings;
     EventInstance titleThemeInstance;
-    StudioListener titleThemeStudioListener;
     [SerializeField] EventReference mainThemeRefStrings;
     EventInstance mainThemeInstance;
-    StudioListener mainThemeStudioListener;
     public static SoundManager Instance { get; private set; }
 
     private void Awake()
@@ -46,7 +44,14 @@ public class SoundManager : MonoBehaviour
 #if UNITY_WEBGL
 #elif UNITY_SERVER
 #else
-        titleThemeStudioListener = gameObject.AddComponent<StudioListener>();
+        titleThemeInstance = FMODUnity.RuntimeManager.CreateInstance(titleThemeRefStrings);
+        titleThemeInstance.start();
+
+        if (mainThemeInstance.isValid())
+        {
+            mainThemeInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            mainThemeInstance.release();
+        }
 #endif
     }
     public void PlayMainTheme()
@@ -54,8 +59,14 @@ public class SoundManager : MonoBehaviour
 #if UNITY_WEBGL
 #elif UNITY_SERVER
 #else
-        titleThemeStudioListener.StopAllCoroutines();
-        mainThemeStudioListener = gameObject.AddComponent<StudioListener>();
+        mainThemeInstance = FMODUnity.RuntimeManager.CreateInstance(mainThemeRefStrings);
+        mainThemeInstance.start();
+
+        if (titleThemeInstance.isValid())
+        {
+            titleThemeInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            titleThemeInstance.release();
+        }
 #endif
     }
     public void PlayDeathSound()

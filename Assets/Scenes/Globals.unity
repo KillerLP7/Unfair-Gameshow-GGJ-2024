@@ -1136,6 +1136,20 @@ MonoBehaviour:
       Data3: -1517198414
       Data4: 1198234182
     Path: event:/steps
+  titleThemeRefStrings:
+    Guid:
+      Data1: -1355722489
+      Data2: 1237639538
+      Data3: -1330915935
+      Data4: 1390357150
+    Path: event:/BGM/title_screen_bgm
+  mainThemeRefStrings:
+    Guid:
+      Data1: -285439227
+      Data2: 1286169683
+      Data3: 1805651899
+      Data4: -2118227443
+    Path: event:/BGM/level_1_bgm
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
