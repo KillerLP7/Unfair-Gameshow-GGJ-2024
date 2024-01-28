@@ -189,8 +189,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -496,14 +496,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -55.7841
       objectReference: {fileID: 0}
-    - target: {fileID: 2020806145258190805, guid: b954b25383290fa4cba645aa152c3301, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1891090159}
-    - target: {fileID: 2020806145258190805, guid: b954b25383290fa4cba645aa152c3301, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowMainMenu
-      objectReference: {fileID: 0}
     - target: {fileID: 2131958838808852540, guid: b954b25383290fa4cba645aa152c3301, type: 3}
       propertyPath: m_Name
       value: MatchList
@@ -570,7 +562,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3939109299583437928, guid: b954b25383290fa4cba645aa152c3301, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -112.45885
+      value: -112.45886
       objectReference: {fileID: 0}
     - target: {fileID: 4357202533115990446, guid: b954b25383290fa4cba645aa152c3301, type: 3}
       propertyPath: m_AnchorMax.y
@@ -611,14 +603,6 @@ PrefabInstance:
     - target: {fileID: 4640458312215886149, guid: b954b25383290fa4cba645aa152c3301, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -55.7841
-      objectReference: {fileID: 0}
-    - target: {fileID: 4921537160892413576, guid: b954b25383290fa4cba645aa152c3301, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 44c8140dd11289941b10a203450e7053, type: 2}
-    - target: {fileID: 4921537160892413576, guid: b954b25383290fa4cba645aa152c3301, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5339649230562192536, guid: b954b25383290fa4cba645aa152c3301, type: 3}
       propertyPath: m_AnchorMax.y
@@ -750,17 +734,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8611878199678180057, guid: b954b25383290fa4cba645aa152c3301, type: 3}
   m_PrefabInstance: {fileID: 1891090157}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1891090159 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 68988604489937744, guid: b954b25383290fa4cba645aa152c3301, type: 3}
-  m_PrefabInstance: {fileID: 1891090157}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1097832082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a15c807d89bbdad45840c1a58a948318, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2455851675940742869
 GameObject:
   m_ObjectHideFlags: 0

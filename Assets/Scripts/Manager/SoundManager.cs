@@ -18,6 +18,13 @@ public class SoundManager : MonoBehaviour
     EventInstance fireInstance;
     [SerializeField] EventReference stepRefStrings;
     EventInstance stepInstance;
+
+    [SerializeField] EventReference titleThemeRefStrings;
+    EventInstance titleThemeInstance;
+    StudioListener titleThemeStudioListener;
+    [SerializeField] EventReference mainThemeRefStrings;
+    EventInstance mainThemeInstance;
+    StudioListener mainThemeStudioListener;
     public static SoundManager Instance { get; private set; }
 
     private void Awake()
@@ -33,6 +40,23 @@ public class SoundManager : MonoBehaviour
     void Update()
     {
         
+    }
+    public void PlayTitleTheme()
+    {
+#if UNITY_WEBGL
+#elif UNITY_SERVER
+#else
+        titleThemeStudioListener = gameObject.AddComponent<StudioListener>();
+#endif
+    }
+    public void PlayMainTheme()
+    {
+#if UNITY_WEBGL
+#elif UNITY_SERVER
+#else
+        titleThemeStudioListener.StopAllCoroutines();
+        mainThemeStudioListener = gameObject.AddComponent<StudioListener>();
+#endif
     }
     public void PlayDeathSound()
     {

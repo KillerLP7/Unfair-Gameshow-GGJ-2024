@@ -39,7 +39,7 @@ public class MatchList : MonoBehaviour
 #elif UNITY_SERVER
         HostServer();
 #else
-
+        Globals.wantsMainPlayer = true;
 #endif
     }
 
