@@ -115,7 +115,6 @@ public class StagePartEditor : MonoBehaviour
     private void SelectHazardToPlace(int index)
     {
         currentSelectedHazard = index;
-        Debug.Log(currentSelectedHazard);
         for (int i = 0; i < activeHazardToolboxElements.Count; i++)
         {
             activeHazardToolboxElements[i].transform.Find("SelectedBackground").gameObject.SetActive(i == index);
@@ -215,7 +214,8 @@ public class StagePartEditor : MonoBehaviour
 
     public void FinishEditAndSend()
     {
-        stageBuilder.CreateStageByStagePart(placedHazards);
+        List<GameObject> test;
+        stageBuilder.CreateStageByStagePart(placedHazards, out test);
         if (NetManager.singleton != null)
         {
             NetManager.singleton.LocalObserver.CmdSendLevel(new List<int>(placedHazards.Keys), new List<int>(placedHazards.Values));

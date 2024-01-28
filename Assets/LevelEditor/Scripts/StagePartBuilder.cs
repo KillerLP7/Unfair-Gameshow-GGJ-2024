@@ -15,15 +15,32 @@ public class StagePartBuilder : MonoBehaviour
     public GameObject CreateStageByStagePart(Dictionary<int,int> stagePart)
     {
         GameObject stage = Instantiate(BaseStagePrefab);
-        //stage.SetActive(false);
 
         Dictionary<int, GameObject> hazards = new Dictionary<int, GameObject>();
         foreach (int item in stagePart.Keys)
         {
             hazards[item] = Instantiate(AllStageHazards[stagePart[item]].hazardPrefab, stage.transform);
-            hazards[item].transform.localPosition = new Vector3(item - xOffsetHeightOfHazards, -yOffsetOfHazards, 0);
+            hazards[item].transform.localPosition = new Vector3(item - xOffsetHeightOfHazards + AllStageHazards[stagePart[item]].xOffset, -yOffsetOfHazards + AllStageHazards[stagePart[item]].yOffset, 0);
         }
         
+        return stage;
+    }
+
+    public GameObject CreateStageByStagePart(Dictionary<int, int> stagePart, out List<GameObject> interactableHazards)
+    {
+        GameObject stage = Instantiate(BaseStagePrefab);
+        interactableHazards = new List<GameObject>();
+
+        Dictionary<int, GameObject> hazards = new Dictionary<int, GameObject>();
+        foreach (int item in stagePart.Keys)
+        {
+            hazards[item] = Instantiate(AllStageHazards[stagePart[item]].hazardPrefab, stage.transform);
+            hazards[item].transform.localPosition = new Vector3(item - xOffsetHeightOfHazards + AllStageHazards[stagePart[item]].xOffset, -yOffsetOfHazards + AllStageHazards[stagePart[item]].yOffset, 0);
+            if (AllStageHazards[stagePart[item]].isInteractable)
+            {
+                interactableHazards.Add(hazards[item]);
+            }
+        }
 
         return null;
     }
