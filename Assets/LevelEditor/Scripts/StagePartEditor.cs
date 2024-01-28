@@ -212,6 +212,10 @@ public class StagePartEditor : MonoBehaviour
 
     public void FinishEditAndSend()
     {
+        if (NetManager.singleton != null)
+        {
+            NetManager.singleton.LocalObserver.CmdSendLevel(new List<int>(placedHazards.Keys), new List<int>(placedHazards.Values));
+        }
         foreach (int item in placedHazards.Keys)
         {
             Destroy(displayedHazardIcons[item].gameObject);
