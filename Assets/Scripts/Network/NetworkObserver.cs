@@ -46,6 +46,7 @@ public class NetworkObserver : NetworkBehaviour
     [ClientRpc]
     public void SetSubmittedLevelInteractable(int amountOfButtons)
     {
+        if (!isLocalPlayer) return;
         if (StagePartEditor.instance != null)
         {
             StagePartEditor.instance.SetManualActivationKeysActive(amountOfButtons);
@@ -55,6 +56,7 @@ public class NetworkObserver : NetworkBehaviour
     [ClientRpc]
     public void SubmittedLevelFinished()
     {
+        if (!isLocalPlayer) return;
         if (StagePartEditor.instance != null)
         {
             StagePartEditor.instance.SetManualActivationKeysActive(0);
