@@ -38,10 +38,11 @@ public class GameManager : MonoBehaviour
     private PlayerController _player;
     private GameObject _lastCheckPoint;
     private Vector3 stagePos;
-    private List<Dictionary<int, int>> _playerLevels;
-    private List<playerCreatedLevel> _playerCreatedLevels;
+    private List<Dictionary<int, int>> _playerLevels = new List<Dictionary<int, int>>();
+    private List<playerCreatedLevel> _playerCreatedLevels = new();
     private Dictionary<int, int> _playerLevel;
     private int _lastPlayerID = -1;
+    private bool _bFirstLevelLoad = true;
 
     public static GameManager Instance { get; private set; }
     public GameObject[] stageParts;
@@ -63,7 +64,6 @@ public class GameManager : MonoBehaviour
         _cameraFollow = Camera.main.GetComponent<CameraFollow>();
         _cameraFollow.toFollow = _player.gameObject;
         _lastCheckPoint = _spawnPoint;
-
         LoadNextStage();
         LoadNextStage();
         LoadNextStage();
@@ -92,6 +92,11 @@ public class GameManager : MonoBehaviour
     public void UpdateCheckPoint(GameObject pCheckPoint)
     {
         _lastCheckPoint = pCheckPoint;
+
+        float x = _lastCheckPoint.transform.position.x - 3;
+        float toX = x + 16;
+
+        Camera.main.GetComponent<CameraFollow>().SetBounds(new Vector2(x, toX));
         //limmit player and camera movement
         //_cameraFollow.SetBounds(new Vector2(_player.transform.position.x, _player.transform.position.y));
         //_player.SetBound(9);
@@ -111,10 +116,18 @@ public class GameManager : MonoBehaviour
         stagePos.x += nextStageOffsetX;
         //Random.Range(0, )
         GameObject levelToLoad;
-        List<GameObject> levelObj;
         if (_playerLevels.Count == 0)
         {
-            int randomLevelNR = Random.Range(0, stageParts.Length);
+            int randomLevelNR = 0;
+            if (_bFirstLevelLoad)
+            {
+                _bFirstLevelLoad = false;
+            }
+            else
+            {
+                randomLevelNR = Random.Range(0, stageParts.Length);
+            }
+           
             levelToLoad = Instantiate(stageParts[randomLevelNR], stagePos, Quaternion.identity);
         }
         else
@@ -130,7 +143,7 @@ public class GameManager : MonoBehaviour
 
     public void CheckIsLevelPartByPlayer(GameObject pLevel)
     {
-        if (!(_lastPlayerID >= 0))
+        if (_lastPlayerID >= 0)
             LevelFinshedFromOberverX(_lastPlayerID);
 
         _lastPlayerID = -1;
