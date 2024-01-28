@@ -35,13 +35,19 @@ public class NetworkObserver : NetworkBehaviour
     [ClientRpc]
     public void SetSubmittedLevelInteractable(int amountOfButtons)
     {
-        // TODO:
+        if (StagePartEditor.instance != null)
+        {
+            StagePartEditor.instance.SetManualActivationKeysActive(amountOfButtons);
+        }
     }
 
     [ClientRpc]
     public void SubmittedLevelFinished()
     {
-        // TODO:
+        if (StagePartEditor.instance != null)
+        {
+            StagePartEditor.instance.SetManualActivationKeysActive(0);
+        }
     }
 
     [Command]
