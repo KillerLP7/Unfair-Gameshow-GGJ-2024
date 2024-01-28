@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
         else
         {
             playerCreatedLevel tempPlayerLevel = new playerCreatedLevel();
-            tempPlayerLevel.level = StageBuilder.CreateStageByStagePart(_playerLevels[0], out tempPlayerLevel.triggerObj);
+            tempPlayerLevel.level = StageBuilder.CreateStageByStagePart(_playerLevels[0], stagePos, out tempPlayerLevel.triggerObj);
             tempPlayerLevel.iD = _playerLevels.First()[0];
             _playerCreatedLevels.Add(tempPlayerLevel);
             levelToLoad = tempPlayerLevel.level;
