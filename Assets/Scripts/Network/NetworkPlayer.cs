@@ -20,9 +20,11 @@ public class NetworkPlayer : NetworkBehaviour
         Conn = conn;
     }
 
-    [ClientRpc]
+    [TargetRpc]
     public void SetLevel(List<int> a, List<int> b, int id)
     {
+        if (!isLocalPlayer) return;
+
         Dictionary<int, int> c = new Dictionary<int, int>();
         for (int i = 0; i < a.Count; i++)
         {
@@ -32,9 +34,10 @@ public class NetworkPlayer : NetworkBehaviour
         GameManager.Instance.SetLevel(c, id);
     }
 
-    [ClientRpc]
+    [TargetRpc]
     public void Interact(int toInteract, int netID)
     {
+        if (!isLocalPlayer) return;
         GameManager.Instance.ObserverInteractWithLevel(netID, toInteract);
 
     }
