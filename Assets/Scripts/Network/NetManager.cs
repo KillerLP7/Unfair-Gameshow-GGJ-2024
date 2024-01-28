@@ -24,6 +24,8 @@ public class NetManager : NetworkManager
     public NetworkPlayer Player { get; private set; }
     public List<NetworkObserver> Observers { get; private set; } = new List<NetworkObserver>();
 
+    public NetworkObserver LocalObserver { get;  set; }
+
     int counter = 0;
 
     /// <summary>

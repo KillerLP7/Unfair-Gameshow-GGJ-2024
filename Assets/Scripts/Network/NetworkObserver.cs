@@ -18,6 +18,8 @@ public class NetworkObserver : NetworkBehaviour
 
         SceneManager.LoadScene("scenes/StageEditorScene");
         Destroy(UIManager.Instance.gameObject);
+
+        NetManager.singleton.LocalObserver = this;
     }
 
     [Command]
