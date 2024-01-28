@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   hazardPrefab: {fileID: 8651253119410356720, guid: 3b25a3f81ad08834cb5fe961835810c8, type: 3}
-  hazardSprite: {fileID: 0}
+  hazardSprite: {fileID: 21300000, guid: 4995b2da77fb953478b07920890236b8, type: 3}
   size: 1
-  xOffset: 0
+  xOffset: 0.5
   yOffset: 0
   isInteractable: 0

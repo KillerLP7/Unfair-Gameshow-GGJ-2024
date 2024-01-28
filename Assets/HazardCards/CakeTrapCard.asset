@@ -16,6 +16,6 @@ MonoBehaviour:
   hazardPrefab: {fileID: 155290980856647371, guid: 422d9e907788169498de714ddf0f2d4a, type: 3}
   hazardSprite: {fileID: 21300000, guid: 7048d9b5d152fae43bc0024279c31902, type: 3}
   size: 1
-  xOffset: 0
-  yOffset: 0
+  xOffset: 0.5
+  yOffset: 2
   isInteractable: 1
