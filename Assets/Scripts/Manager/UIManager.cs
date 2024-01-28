@@ -9,7 +9,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private float _ScreenTime;
     [SerializeField] private List<RectTransform> _gameOverScreens;
     [SerializeField] private RectTransform _CakedScreen;
-    private Rigidbody2D _rb;
     private Vector2 _cakedscreenPosition;
 
     public static UIManager Instance { get; private set; }
@@ -17,6 +16,7 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     // Start is called before the first frame update

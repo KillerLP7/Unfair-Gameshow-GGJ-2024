@@ -13,9 +13,14 @@ public class MatchList : MonoBehaviour
     [SerializeField] private TMP_InputField ip;
     [SerializeField] private TMP_InputField port;
 
-    [SerializeField] private Button cancelButton;
+    [SerializeField] private Button connectPrimaryButton;
+    [SerializeField] private Button connectInputButton;
+
+    [SerializeField] private string primaryIp;
+    [SerializeField] private ushort primaryPort;
 
     private ExtendedCoroutine connectedRoutine;
+    private bool connectToPrimary = false;
 
     private void Start()
     {
@@ -40,7 +45,22 @@ public class MatchList : MonoBehaviour
         if (connectedRoutine != null)
             return;
 
-        cancelButton.interactable = false;
+        connectToPrimary = false;
+
+        connectPrimaryButton.interactable = false;
+        connectInputButton.interactable = false;
+        connectedRoutine = new ExtendedCoroutine(this, Connecting(), startNow: true);
+    }
+
+    public void OnTryToConnectToPrimary()
+    {
+        if (connectedRoutine != null)
+            return;
+
+        connectToPrimary = true;
+
+        connectPrimaryButton.interactable = false;
+        connectInputButton.interactable = false;
         connectedRoutine = new ExtendedCoroutine(this, Connecting(), startNow: true);
     }
 
@@ -48,7 +68,8 @@ public class MatchList : MonoBehaviour
     {
         StopCoroutine(connectedRoutine.Coroutine);
         connectedRoutine = null;
-        cancelButton.interactable = true;
+        connectPrimaryButton.interactable = true;
+        connectInputButton.interactable = true;
 
         if (stop)
             NetManager.singleton.StopClient();
@@ -65,14 +86,25 @@ public class MatchList : MonoBehaviour
     {
         yield return null; // ignore this, dont delete it
 
-        if (!ushort.TryParse(port.text, out ushort castedPort) || !ValidAddress(ip.text))
+        ushort connectToPort;
+        string ipAddress;
+        if (connectToPrimary)
         {
-            StopTryingToConnect();
-            yield break;
+            connectToPort = primaryPort;
+            ipAddress = primaryIp;
+        }
+        else
+        {
+            ipAddress = ip.text;
+            if (!ushort.TryParse(port.text, out connectToPort) || !ValidAddress(ipAddress))
+            {
+                StopTryingToConnect();
+                yield break;
+            }
         }
 
-        (NetManager.singleton.transport as SimpleWebTransport).port = castedPort;
-        NetManager.singleton.networkAddress = ip.text;
+        (NetManager.singleton.transport as SimpleWebTransport).port = connectToPort;
+        NetManager.singleton.networkAddress = ipAddress;
         NetManager.singleton.StartClient();
 
         yield return new WaitForSeconds(7.0f);

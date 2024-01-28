@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Mirror;
 using UnityEngine.Events;
+using System.Collections.Generic;
 
 /*
 	Documentation: https://mirror-networking.gitbook.io/docs/components/network-manager
@@ -16,6 +17,14 @@ public class NetManager : NetworkManager
     public static new NetManager singleton => (NetManager)NetworkManager.singleton;
 
     public UnityEvent connected;
+
+    [SerializeField] private NetworkPlayer networkPlayerPrefab;
+    [SerializeField] private NetworkObserver networkObserverPrefab;
+
+    public NetworkPlayer Player { get; private set; }
+    public List<NetworkObserver> Observers { get; private set; } = new List<NetworkObserver>();
+
+    int counter = 0;
 
     /// <summary>
     /// Runs on both Server and Client
@@ -162,6 +171,21 @@ public class NetManager : NetworkManager
     /// <param name="conn">Connection from client.</param>
     public override void OnServerDisconnect(NetworkConnectionToClient conn)
     {
+        if (Player.Conn == conn)
+        {
+            Player = null;
+        }
+        else
+        {
+            int index = Observers.FindIndex(x => x.Conn == conn);
+            // Do something with observer?
+
+            if (index < 0)
+            {
+                Observers.RemoveAt(index);
+            }
+        }
+
         base.OnServerDisconnect(conn);
     }
 
@@ -225,7 +249,12 @@ public class NetManager : NetworkManager
     /// This is invoked when a server is started - including when a host is started.
     /// <para>StartServer has multiple signatures, but they all cause this hook to be called.</para>
     /// </summary>
-    public override void OnStartServer() { }
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+
+        NetworkServer.RegisterHandler<HelloMessage>(OnHelloMessage);
+    }
 
     /// <summary>
     /// This is invoked when the client is started.
@@ -247,5 +276,29 @@ public class NetManager : NetworkManager
     /// </summary>
     public override void OnStopClient() { }
 
+    #endregion
+
+    #region Messages
+    private void OnHelloMessage(NetworkConnectionToClient conn, HelloMessage message)
+    {
+        bool isPrimary = Player != null && message.wantsToBePlayer;
+        if (isPrimary)
+        {
+            Player = Instantiate(networkPlayerPrefab);
+
+            NetworkServer.AddPlayerForConnection(conn, Player.gameObject);
+            return;
+        }
+
+        NetworkObserver observer = Instantiate(networkObserverPrefab);
+
+        string newName = message.name;
+        if (string.IsNullOrEmpty(newName)) newName = "Observer " + (++counter).ToString();
+
+        observer.Init(conn, newName);
+        Observers.Add(observer);
+
+        NetworkServer.AddPlayerForConnection(conn, observer.gameObject);
+    }
     #endregion
 }

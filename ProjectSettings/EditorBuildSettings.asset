@@ -5,10 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/NoahTestScene.unity
+    path: Assets/Scenes/Starter.unity
+    guid: 01622af3fafa3b3439f8afc172ca2d23
+  - enabled: 1
+    path: Assets/Scenes/Tests/NoahTestScene.unity
     guid: e1b75479ebacffe49a068ddfb9e987c3
+  - enabled: 1
+    path: Assets/Scenes/Globals.unity
+    guid: 890605287a0a3e64a879bd02fcdecc5a
+  - enabled: 1
+    path: Assets/Scenes/NetworkJoinScene.unity
+    guid: 6414574825644e34b8546acaebea3506
+  - enabled: 1
+    path: Assets/Scenes/StageEditorScene.unity
+    guid: 4f5b3752787c5c446978a7c6af1386d7
   m_configObjects: {}

@@ -10,6 +10,11 @@ public class CameraFollow : MonoBehaviour
 
     [SerializeField] private Vector2 bounds = new(float.MinValue, float.MaxValue);
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     //TODO:: has to be called somewhere
     public void SetBounds(Vector2 newBounds)
     {

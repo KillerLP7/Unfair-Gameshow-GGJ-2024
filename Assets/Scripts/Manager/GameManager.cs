@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float x;
 
     private List<GameObject> createdStageObjects = new List<GameObject>();
-    
+
     private PlayerController _player;
     private GameObject _lastCheckPoint;
     private Vector3 stagePos;
@@ -22,13 +22,14 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        DontDestroyOnLoad(transform.parent.gameObject);
     }
     // Start is called before the first frame update
     void Start()
     {
-        _player = Instantiate(_playerPrefab, _spawnPoint.transform.position, Quaternion.identity);
-        _cameraFollow.toFollow = _player.gameObject;
-        _lastCheckPoint = _spawnPoint;
+        // _player = Instantiate(_playerPrefab, _spawnPoint.transform.position, Quaternion.identity);
+        // _cameraFollow.toFollow = _player.gameObject;
+        // _lastCheckPoint = _spawnPoint;
     }
 
     // Update is called once per frame
